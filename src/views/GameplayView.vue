@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <FloatButton class="absolute"/>
     <div v-if="selectChamp">
       <h1>Selecione um personagem</h1>
       <button class="character-message" @click="actSecret()" >
@@ -15,15 +16,13 @@
         </div>
       </div>
     </div>
-    <div v-if="cutscene">
+    <div class="cutscene" v-if="cutscene">
       <video
-       src="../assets/videos/imaginary_friend.mp4" autoplay>
-          <track default
-                kind="captions"
-                srclang="en"
-                src="../assets/videos/imaginary_friend.mp4" />
+       src="../assets/videos/imaginary_friend.mp4" autoplay id="sceneDOMVid">
+          <track default kind="captions"/>
           Sorry, your browser doesn't support embedded videos.
       </video>
+      <button @click="skipVideo">skip 🠺 </button>
     </div>
     <div v-if="gameplay" id="gameplay">
       <h1>?</h1>
@@ -33,10 +32,11 @@
 
 <script>
 import Character from '@/components/Character.vue';
+import FloatButton from '@/components/FloatButton.vue';
 import music from '@/utils/music';
 
 export default {
-  components: { Character },
+  components: { Character, FloatButton },
   data() {
     return {
       // #TODO Encontrar um lugar novo pra upar, deixar no discord n da KKKKK
@@ -99,6 +99,10 @@ export default {
         this.gameplay = true;
       }, 31700);
     },
+    skipVideo() {
+      this.cutscene = false;
+      this.gameplay = true;
+    },
     // Action Secret
     actSecret() {
       if (this.secretKey === 5 && this.characters.length <= 5) {
@@ -123,6 +127,13 @@ export default {
 
 h1 {
   letter-spacing: 2px;
+}
+
+/* back arrow */
+.absolute{
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
 
 .character-message {
@@ -158,12 +169,30 @@ h1 {
   }
 }
 
+/* Cutscene */
+.cutscene {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  button{
+    width: 320px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background-color: transparent;
+    font-weight: 500;
+    border: 0px;
+    padding: 20px;
+    cursor: pointer;
+  }
+}
+
 /* Gameplay de fato */
 
 #gameplay {
   width: 1280px;
   height: 720px;
-  background-color: red;
+  background-color: rgba(22, 21, 21, 0.895);
 }
 
 </style>

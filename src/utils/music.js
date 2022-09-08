@@ -5,14 +5,12 @@ const music = {
   playTheme(can) {
     const audio = new Audio(sound);
     if (can) {
-      audio.volume = 0.40;
+      audio.volume = 0.20;
       audio.play();
-      console.log(can);
       return;
     }
-    audio.volume = 0.0;
+    audio.volume = 0.00;
     audio.pause();
-    console.log(can);
   },
 
 };

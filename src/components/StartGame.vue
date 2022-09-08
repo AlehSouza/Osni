@@ -2,8 +2,8 @@
   <div class="container-start">
     <nav>
       <router-link to="/gameplay">Jogar</router-link>
-      <router-link to="/about">Tutorial</router-link>
-      <router-link to="/about">Créditos</router-link>
+      <router-link to="/credit">Tutorial</router-link>
+      <router-link to="/credit">Créditos</router-link>
     </nav>
     <router-view/>
   </div>

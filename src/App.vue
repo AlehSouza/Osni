@@ -50,13 +50,17 @@ export default {
   font-family: 'Tiro Bangla', serif;
   background-color: rgba(12, 12, 12, 0.7);;
   width: 100%;
-  height: 98vh;
+  height: 100vh;
   margin: 0px;
-  paddding: 0px;
+  padding: 0px;
   text-align: center;
   justify-content: center;
   align-items: center;
   display: flex;
+}
+
+*{
+  font-family: 'Tiro Bangla', serif;
 }
 
 nav {
@@ -78,6 +82,9 @@ nav {
   h1,
   h2{
     letter-spacing: 3px;
+  }
+  h1{
+    color: red;
   }
   button{
     color: #a5d6cc;
