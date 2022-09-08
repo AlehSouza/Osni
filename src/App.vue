@@ -18,26 +18,25 @@
         </p>
       </div>
       <br><br>
-      <button @click="playMusic()">Ok vou me divertir, eu prometo</button>
+      <button @click="hideModal()">Ok vou me divertir, eu prometo</button>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
-import sound from './assets/audios/theme_osni.mp3';
+import music from '@/utils/music';
 
 export default {
   data() {
     return {
-
+      music,
     };
   },
   methods: {
-    playMusic() {
+    hideModal() {
       document.getElementById('modal').style.display = 'none';
-      const audio = new Audio(sound);
-      audio.play();
+      music.playTheme(true);
     },
   },
 };
@@ -49,8 +48,11 @@ export default {
 #app {
   overflow: hidden;
   font-family: 'Tiro Bangla', serif;
+  background-color: rgba(12, 12, 12, 0.7);;
   width: 100%;
   height: 98vh;
+  margin: 0px;
+  paddding: 0px;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -62,17 +64,26 @@ nav {
     font-weight: bold;
     color: #2c3e50;
     &.router-link-exact-active {
-      color: #42b983;
+      color: #000000;
     }
   }
 }
 #modal{
-  padding: 120px;
-  background-color: red;
+  border: 4mm ridge rgba(237, 136, 20, 0.8);
+  color: white;
+  padding: 6vw;
+  background-color: #233531;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   position: absolute;
+  h1,
+  h2{
+    letter-spacing: 3px;
+  }
   button{
-    border: 3px solid black;
-    background-color: white;
+    color: #a5d6cc;
+    border: 3px solid #308774;
+    background-color: #233531;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     font-weight: bold;
     text-transform: uppercase;
     padding: 10px 40px;

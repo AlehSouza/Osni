@@ -36,10 +36,11 @@ export default {
 }
 .characters-bg{
   height: 240px;
-  background-image: url('https://cdn.discordapp.com/attachments/512809986699690004/1017292686719455233/OSNI_Ep_7.webp');
-  background-size: 200%;
-  border: 4mm ridge rgba(237, 136, 20, 0.8);
   transition: 0.3s;
+  border: 4mm ridge rgba(237, 136, 20, 0.8);
+  background-image: url('https://cdn.discordapp.com/attachments/512809986699690004/1017292686719455233/OSNI_Ep_7.webp');
+  background-size: 300%;
+  background-position: right;
   justify-content: center;
   align-items: center;
   display: flex;

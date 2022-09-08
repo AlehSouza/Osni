@@ -2,9 +2,9 @@
   <div class="container">
     <div v-if="selectChamp">
       <h1>Selecione um personagem</h1>
-      <p class="character-message">
+      <button class="character-message" @click="actSecret()" >
         <q>A verdadeira arte é só um reflexo dos sentimentos de quem a contempla</q>
-      </p>
+      </button>
       <div class="select-champ">
         <div
           class="character-container"
@@ -15,14 +15,25 @@
         </div>
       </div>
     </div>
-    <div>
-      <img :src="charPicked?.image" alt="">
+    <div v-if="cutscene">
+      <video
+       src="../assets/videos/imaginary_friend.mp4" autoplay>
+          <track default
+                kind="captions"
+                srclang="en"
+                src="../assets/videos/imaginary_friend.mp4" />
+          Sorry, your browser doesn't support embedded videos.
+      </video>
+    </div>
+    <div v-if="gameplay" id="gameplay">
+      <h1>?</h1>
     </div>
   </div>
 </template>
 
 <script>
 import Character from '@/components/Character.vue';
+import music from '@/utils/music';
 
 export default {
   components: { Character },
@@ -30,6 +41,8 @@ export default {
     return {
       // #TODO Encontrar um lugar novo pra upar, deixar no discord n da KKKKK
       selectChamp: true,
+      cutscene: false,
+      gameplay: false,
       charPicked: {},
       characters: [
         {
@@ -63,6 +76,14 @@ export default {
           gender: 'Male',
         },
       ],
+      secretChar: {
+        id: 5,
+        name: 'Bisteca Supremacy',
+        image: 'https://cdn.discordapp.com/attachments/512809986699690004/1017511483325825095/Miniatura_Bisteca_em_O_Segredo_na_Ilha.webp',
+        gender: 'Male',
+      },
+      secretKey: 0,
+      music,
     };
   },
   beforeMount() {
@@ -71,7 +92,23 @@ export default {
     getCharacter(obj) {
       this.charPicked = obj;
       this.selectChamp = false;
-      console.log(this.charPicked);
+      music.playTheme(false);
+      this.cutscene = true;
+      setTimeout(() => {
+        this.cutscene = false;
+        this.gameplay = true;
+      }, 31700);
+    },
+    // Action Secret
+    actSecret() {
+      if (this.secretKey === 5 && this.characters.length <= 5) {
+        this.characters.push(this.secretChar);
+        return;
+      }
+      if (this.secretKey >= 6) {
+        return;
+      }
+      this.secretKey += 1;
     },
   },
 };
@@ -80,35 +117,39 @@ export default {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*{
+* {
   color: white;
 }
 
-h1{
+h1 {
   letter-spacing: 2px;
 }
 
-.character-message{
+.character-message {
+  background-color: transparent;
+  border: 0px;
+  margin-bottom: 35px;
   font-family: 'Raleway', sans-serif;
   font-style: italic;
   opacity: 0.6;
   font-size: 24px;
   q{
-    color: #ab553d;
+    color: #c55334;
+    font-weight: 500;
   }
 }
 
-.container{
-  width: 90vw;
-  height: 90vh;
+.container {
+  width: auto;
+  height: 720px;
   margin: auto;
-  background-color: rgba(50, 50, 50, 0.90);
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   display: flex;
 }
 
-.select-champ{
+.select-champ {
   margin-bottom: 120px;
   flex-direction: row;
   display: flex;
@@ -116,4 +157,13 @@ h1{
     margin: 8px;
   }
 }
+
+/* Gameplay de fato */
+
+#gameplay {
+  width: 1280px;
+  height: 720px;
+  background-color: red;
+}
+
 </style>
